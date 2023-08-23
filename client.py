@@ -6,7 +6,7 @@ if nickname == 'admin':
     password = input("Enter password for admin: ")
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(('127.0.0.1', 8080))
+client.connect(('127.0.0.1', 50505))
 
 stop_thread = False
 
@@ -26,7 +26,10 @@ def receive():
                     if client.recv(1024).decode('ascii') == 'REFUSE':
                         print('Connection could not be established. Password incorrect.')
                         stop_thread = True
-                # pass
+                elif next_message == 'BAN':
+                    print('Connection refused because of ban.')
+                    client.close()
+                    stop_thread = True
             else:
                 print(message)
         except:
