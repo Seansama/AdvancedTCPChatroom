@@ -19,7 +19,7 @@ def receive():
         try:
             message = client.recv(1024).decode('ascii')
             if message == 'SHAUN':
-                client.send(nickname.encode('ascii'))
+                client.send(nickname.encode('ascii')) #fix nickname 
                 next_message = client.recv(1024).decode('ascii')
                 if next_message == 'PASS':
                     client.send(password.encode('ascii'))
